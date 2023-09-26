@@ -2,6 +2,7 @@ import { getSession } from '@/app/supabase-server';
 
 import { redirect } from 'next/navigation';
 import Logo from '@/components/icons/Logo';
+import ProjectList from '@/components/ui/SupabaseQueries/ProjectList';
 
 export default async function Projects() {
   const session = await getSession();
@@ -19,6 +20,8 @@ export default async function Projects() {
            <li>- Populate Current Projects Here</li>
            <li>- Add a project button - takes you to -- add project form</li>
            <li>- This is the third sentence.</li>
+           <li>- <ProjectList session={session}
+      user={session?.user}/></li>
           </ul>
         </div>
       </div>
