@@ -1,5 +1,5 @@
 // components/ProjectButton.tsx
-import { useNavigation } from 'next/navigation';
+import Link from 'next/link';
 import PropTypes from 'prop-types';
 import React, { FC } from 'react';
 
@@ -7,38 +7,24 @@ interface ProjectButtonProps {
   redirectTo: string;
   color?: string;
   size?: string;
+  className?: string; // Add className prop
 }
 
-const ProjectButton: FC<ProjectButtonProps> = ({ redirectTo, color, size }) => {
-  const navigation = useNavigation();
-
-  const handleClick = () => {
-    navigation.navigate(redirectTo);
-  };
+const ProjectButton: FC<ProjectButtonProps> = ({ redirectTo, color, size, className }) => {
+  // Define a default gradient class if color is not provided
+  const gradientClass = color || 'bg-gradient-to-r from-orange-500 via-red-600 to-pink-500';
 
   return (
-    <button
-      onClick={handleClick}
-      style={{
-        backgroundColor: color || 'orange',
-        width: size || '100px',
-        height: size || '100px',
-        borderRadius: '50%',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        color: 'white',
-        cursor: 'pointer',
-        border: 'none',
-        outline: 'none',
-        fontSize: '18px',
-        fontWeight: 'bold',
-      }}
-    >
-      <div style={{ fontSize: '30px' }}>+</div>
-      <div>Add Project</div>
-    </button>
+    <Link href={redirectTo}>
+      <div
+        className={`${
+          className ? className : '' // Allow custom classes
+        } ${gradientClass} w-${size || '100'} h-${size || '100'} rounded-full flex flex-col justify-center items-center text-white text-center cursor-pointer text-lg font-bold`}
+      >
+        <div style={{ fontSize: '30px' }}>+</div>
+        <div>Add Project</div>
+      </div>
+    </Link>
   );
 };
 

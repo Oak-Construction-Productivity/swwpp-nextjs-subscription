@@ -16,7 +16,7 @@ export default async function Projects() {
 <div className="flex flex-col items-center justify-center height-screen-helper">
   <div className="w-3/4 mt-2 text-center"> {/* Reduced mt-4 to mt-2 */}
     <ProjectList session={session} user={session?.user} />
-    <ProjectButton redirectTo="/add" color="blue" size="150px" />
+    <ProjectButton redirectTo="projects/add" color="bg-gradient-to-r from-yellow-500 via-red-600 to-pink-500" size="150" className="custom-class" />
 
   </div>
   <div className="w-3/4 mt-4 text-center"> {/* You can adjust mt-4 as needed */}
