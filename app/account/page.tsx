@@ -103,7 +103,7 @@ export default async function Account() {
                 variant="slim"
                 type="submit"
                 form="nameForm"
-                disabled={true}
+                disabled={false}
               >
                 {/* WARNING - In Next.js 13.4.x server actions are in alpha and should not be used in production code! */}
                 Update Name
@@ -136,7 +136,7 @@ export default async function Account() {
                 variant="slim"
                 type="submit"
                 form="emailForm"
-                disabled={true}
+                disabled={false}
               >
                 {/* WARNING - In Next.js 13.4.x server actions are in alpha and should not be used in production code! */}
                 Update Email
