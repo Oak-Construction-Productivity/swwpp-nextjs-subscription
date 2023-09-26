@@ -15,7 +15,7 @@ export default async function Add() {
       <div className="flex flex-col justify-between max-w-lg p-3 m-auto w-80 ">
         <div className="flex justify-center pb-12 ">
           <h2>Form Here For New Project: Import Component, Check plan for payment/</h2>
-
+            <h5>redirect to projects upon success, redirect to increase subscription if not paid enough projects</h5>
         </div>
       </div>
     </div>
