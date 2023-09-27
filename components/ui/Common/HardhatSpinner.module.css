@@ -1,0 +1,44 @@
+/* components/HardhatSpinner.module.css */
+.spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px; /* Adjust this to your desired size */
+  }
+  
+  .hardhat {
+    width: 60px; /* Adjust this to your desired size */
+    height: 60px; /* Adjust this to your desired size */
+    border: 5px solid #333;
+    border-radius: 50%;
+    position: relative;
+    animation: spin 2s linear infinite;
+  }
+  
+  .top,
+  .bottom {
+    width: 100%;
+    height: 10px;
+    background-color: #333;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .top {
+    transform: rotate(45deg);
+  }
+  
+  .bottom {
+    transform: rotate(-45deg);
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
