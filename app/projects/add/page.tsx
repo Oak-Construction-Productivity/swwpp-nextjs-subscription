@@ -4,6 +4,7 @@ import { createClient } from '@supabase/supabase-js';
 import { redirect } from 'next/navigation';
 import Logo from '@/components/icons/Logo';
 import ProjectAddForm from '@/components/ui/SupabaseQueries/ProjectAddForm';
+import AddSwpppProject from '@/components/ui/SupabaseQueries/AddSwpppProject';
 
 export default async function Add() {
   const supabaseUrl = 'https://eggvjyydqfibdrgfyyny.supabase.co'
@@ -22,9 +23,9 @@ export default async function Add() {
     <div className="flex justify-center height-screen-helper">
       <div className="flex flex-col justify-between max-w-lg p-3 m-auto w-80 ">
         <div className="flex justify-center pb-12 ">
-          <h2>Form Here For New Project: Import Component, Check plan for payment/</h2>
-            <h5>redirect to projects upon success, redirect to increase subscription if not paid enough projects</h5>
-          <ProjectAddForm />
+          <AddSwpppProject />
+          <p>Form Here For New Project: Import Component, Check plan for payment/</p>
+          <p>redirect to projects upon success, redirect to increase subscription if not paid enough projects</p>
         </div>
       </div>
     </div>
