@@ -65,3 +65,5 @@ export const getActiveProductsWithPrices = async () => {
   }
   return data ?? [];
 };
+
+export const dynamic = 'force-dynamic';

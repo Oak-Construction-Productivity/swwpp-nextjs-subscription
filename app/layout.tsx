@@ -48,7 +48,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-black loading">
         <SupabaseProvider>
-          {/* @ts-expect-error */}
+          {/*  at sign here ts-expect-error */}
           <Navbar />
           <main
             id="skip"
@@ -62,3 +62,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+export const dynamic = 'force-dynamic';
