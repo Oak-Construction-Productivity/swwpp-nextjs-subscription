@@ -1,6 +1,6 @@
 # SWPPP Automation
 
-- https://swppp-automation.vercel.app/
+- https://nextjs-subscription-payments-oakconstruction.vercel.app/
 
 ## Features
 
@@ -10,4 +10,4 @@
 
 ## Demo
 
-- https://swppp-automation.vercel.app/
+- https://nextjs-subscription-payments-oakconstruction.vercel.app/
