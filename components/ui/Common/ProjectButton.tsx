@@ -1,6 +1,6 @@
 // components/ProjectButton.tsx
 import Link from 'next/link';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import React, { FC } from 'react';
 
 interface ProjectButtonProps {
