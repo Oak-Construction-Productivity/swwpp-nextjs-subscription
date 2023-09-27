@@ -20,14 +20,16 @@ export default async function Add() {
   }
 
   return (
-    <div className="flex justify-center height-screen-helper">
-      <div className="flex flex-col justify-between max-w-lg p-3 m-auto w-80 ">
-        <div className="flex justify-center pb-12 ">
-          <AddSwpppProject />
-          <p>Form Here For New Project: Import Component, Check plan for payment/</p>
-          <p>redirect to projects upon success, redirect to increase subscription if not paid enough projects</p>
-        </div>
-      </div>
+<div className="flex justify-center height-screen-helper">
+  <div className="flex flex-col items-center max-w-lg p-3 m-auto w-80">
+    <div className="pb-12">
+      <AddSwpppProject />
     </div>
+    <div className="flex flex-col justify-center text-center">
+      <p>Form Here For New Project: Import Component, Check plan for payment/</p>
+      <p>redirect to projects upon success, redirect to increase subscription if not paid enough projects</p>
+    </div>
+  </div>
+</div>
   );
 }

@@ -60,7 +60,7 @@ export default function ProjectList({session, user}: Props){
     {projects.map((project: any, index: Key | null | undefined) => (
         <Link
             key={index}
-            href={`${basePath}${project.id}`}
+            href={`${"projects/"}${project.id}`}
         >
             <div className="flex flex-col p-4 mb-4">
                 <div className="border-2 border-gray-700 bg-gradient-to-b from-gray-200 to-gray-100 rounded-lg shadow-md p-4">
