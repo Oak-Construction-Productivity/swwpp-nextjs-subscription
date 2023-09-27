@@ -9,9 +9,10 @@ export default function AuthUI() {
   const { supabase } = useSupabase();
   return (
     <div className="flex flex-col space-y-4">
+      <h2>Only Magic Link Working At The Moment</h2>
       <Auth
         supabaseClient={supabase}
-        providers={['github']}
+        //providers={['github']}
         redirectTo={`${getURL()}/auth/callback`}
         magicLink={true}
         appearance={{
