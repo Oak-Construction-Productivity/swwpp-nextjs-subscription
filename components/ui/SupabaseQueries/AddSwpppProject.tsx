@@ -27,6 +27,8 @@ const AddSwpppProject = () => {
     project_state: '',
     project_zip_code: 0,
     email_to: '',
+    lattitude: 0,
+    longitude: 0,
     email_from: '',
     frequency: ''
   });
@@ -186,6 +188,26 @@ const AddSwpppProject = () => {
             type="text"
             name="email_from"
             value={formData.email_from}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label>Longitude:</label>
+          <input
+            type="text"
+            name="longitude"
+            value={formData.longitude}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label>Lattitude:</label>
+          <input
+            type="text"
+            name="lattitude"
+            value={formData.lattitude}
             onChange={handleChange}
             required
           />
