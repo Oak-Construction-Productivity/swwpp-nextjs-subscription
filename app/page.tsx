@@ -1,9 +1,9 @@
-import Home from '@/components/Home';
 import {
   getSession,
   getSubscription,
   getActiveProductsWithPrices
 } from '@/app/supabase-server';
+import Home from '@/components/Home';
 
 export default async function PricingPage() {
   const [session, products, subscription] = await Promise.all([

@@ -1,20 +1,24 @@
-import { useCallback, useState, useEffect } from 'react';
+// Import your Supabase client instance
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { createClient } from '@supabase/supabase-js';
 //import HardhatSpinner from '../Common/HardhatSpinner'; // You may need to implement a Spinner component
 import { redirect } from 'next/navigation';
-import { createClient } from '@supabase/supabase-js'; // Import your Supabase client instance
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { useCallback, useState, useEffect } from 'react';
 
-const supabaseUrl = 'https://eggvjyydqfibdrgfyyny.supabase.co'
-const supabaseKey: string | undefined  = process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY
-  if (!supabaseKey) {
-    throw new Error('SUPABASE_SERVICE_ROLE_KEY is not set in the environment variables.');
-  }
-const supabase = createClient(supabaseUrl, supabaseKey)
-const superbase = createClientComponentClient()
+const supabaseUrl = 'https://eggvjyydqfibdrgfyyny.supabase.co';
+const supabaseKey: string | undefined =
+  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY;
+if (!supabaseKey) {
+  throw new Error(
+    'SUPABASE_SERVICE_ROLE_KEY is not set in the environment variables.'
+  );
+}
+const supabase = createClient(supabaseUrl, supabaseKey);
+const superbase = createClientComponentClient();
 
 const AddSwpppProject = () => {
   const [formData, setFormData] = useState({
-    user: "user.id",
+    user: 'user.id',
     project_name: '',
     project_description: '',
     project_id: 0,
@@ -24,7 +28,7 @@ const AddSwpppProject = () => {
     project_zip_code: 0,
     email_to: '',
     email_from: '',
-    frequency: '',
+    frequency: ''
   });
 
   const spinnerStyles = {
@@ -33,34 +37,33 @@ const AddSwpppProject = () => {
     width: '24px',
     height: '24px',
     borderTop: '3px solid rgba(192, 57, 43, 1)', // Burnt orange color
-    borderBottom: '3px solid rgba(192, 57, 43, 1)', // Burnt orange color
+    borderBottom: '3px solid rgba(192, 57, 43, 1)' // Burnt orange color
   };
 
-  const updateFormData = (user:any, value:any) => {
+  const updateFormData = (user: any, value: any) => {
     setFormData({
       ...formData,
-      [user]: value,
+      [user]: value
     });
-    console.log("updated form with", value)
+    console.log('updated form with', value);
   };
-  
 
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const afunctiontocall = async () => {
-        const { data, error } = await superbase.auth.getSession()
-        if (data) {
-            console.log(data, data?.session?.user)
-            if(data?.session?.user){
-              updateFormData('user', data?.session?.user?.id);
-            }
-          } else {
-            console.log("false ities")
-          }
-    }
-    afunctiontocall()
-  }, [])
+      const { data, error } = await superbase.auth.getSession();
+      if (data) {
+        console.log(data, data?.session?.user);
+        if (data?.session?.user) {
+          updateFormData('user', data?.session?.user?.id);
+        }
+      } else {
+        console.log('false ities');
+      }
+    };
+    afunctiontocall();
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -70,26 +73,26 @@ const AddSwpppProject = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    if (formData.user.length > 10){
-    try {
-      const { data, error } = await supabase
-        .from('projects')
-        .insert([formData])
-        .select();
+    if (formData.user.length > 10) {
+      try {
+        const { data, error } = await supabase
+          .from('projects')
+          .insert([formData])
+          .select();
 
-      if (error) {
-        console.error('Error inserting data:', error);
-      } else {
-        console.log('Data inserted successfully:', data);
-        redirect('/success'); // Redirect to the success page
+        if (error) {
+          console.error('Error inserting data:', error);
+        } else {
+          console.log('Data inserted successfully:', data);
+          redirect('/success'); // Redirect to the success page
+        }
+      } catch (error) {
+        console.error('API call failed:', error);
+      } finally {
+        setIsLoading(false);
       }
-    } catch (error) {
-      console.error('API call failed:', error);
-    } finally {
-      setIsLoading(false);
-    }}
-    else{
-      alert("Not authenticated to post")
+    } else {
+      alert('Not authenticated to post');
     }
   };
 
@@ -197,14 +200,12 @@ const AddSwpppProject = () => {
             required
           />
         </div>
-        <div>
-          {/* Add other input fields in a similar manner */}
-        </div>
+        <div>{/* Add other input fields in a similar manner */}</div>
 
         <button type="submit" disabled={isLoading}>
           {isLoading ? (
             <>
-            <div style={spinnerStyles}></div>
+              <div style={spinnerStyles}></div>
             </>
           ) : (
             'Submit'
@@ -213,7 +214,10 @@ const AddSwpppProject = () => {
       </form>
       <style jsx>{`
         .form-container {
-          background: linear-gradient(white, gray); /* Gray/White gradient background */
+          background: linear-gradient(
+            white,
+            gray
+          ); /* Gray/White gradient background */
           border-radius: 10px; /* Rounded corners */
           padding: 20px; /* Add some spacing around the form */
           color: black; /* Set text color to black */
@@ -248,4 +252,3 @@ const AddSwpppProject = () => {
 };
 
 export default AddSwpppProject;
-

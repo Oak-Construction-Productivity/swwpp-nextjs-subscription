@@ -1,19 +1,23 @@
-'use client'
-import { useState, useCallback } from 'react';
-import { useRouter } from 'next/router';
+'use client';
+
 import { createClient } from '@supabase/supabase-js';
+import { useRouter } from 'next/router';
+import { useState, useCallback } from 'react';
 
 interface SupabaseFormProps {
   onSuccess: () => void;
 }
 
 const SupabaseProjectAdd: React.FC<SupabaseFormProps> = ({ onSuccess }) => {
-  const supabaseUrl = 'https://eggvjyydqfibdrgfyyny.supabase.co'
-  const supabaseKey: string | undefined  = process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY
-    if (!supabaseKey) {
-      throw new Error('SUPABASE_SERVICE_ROLE_KEY is not set in the environment variables.');
-    }
-  const supabase = createClient(supabaseUrl, supabaseKey)
+  const supabaseUrl = 'https://eggvjyydqfibdrgfyyny.supabase.co';
+  const supabaseKey: string | undefined =
+    process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY;
+  if (!supabaseKey) {
+    throw new Error(
+      'SUPABASE_SERVICE_ROLE_KEY is not set in the environment variables.'
+    );
+  }
+  const supabase = createClient(supabaseUrl, supabaseKey);
   const router = useRouter();
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -29,38 +33,44 @@ const SupabaseProjectAdd: React.FC<SupabaseFormProps> = ({ onSuccess }) => {
     email_from: '',
     latitude: '',
     longitude: '',
-    frequency: '',
+    frequency: ''
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: value
     }));
   };
 
-  const handleSubmit = useCallback(async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault();
+      setLoading(true);
 
-    try {
-      // Perform the Supabase API call here
-      const { data, error } = await supabase.from('projects').insert([formData]).select();
+      try {
+        // Perform the Supabase API call here
+        const { data, error } = await supabase
+          .from('projects')
+          .insert([formData])
+          .select();
 
-      if (error) {
-        throw error;
+        if (error) {
+          throw error;
+        }
+
+        // API call was successful
+        setLoading(false);
+        onSuccess();
+        router.push('/success'); // Redirect to a success page
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        setLoading(false);
       }
-
-      // API call was successful
-      setLoading(false);
-      onSuccess();
-      router.push('/success'); // Redirect to a success page
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      setLoading(false);
-    }
-  }, [formData, onSuccess, router]);
+    },
+    [formData, onSuccess, router]
+  );
 
   return (
     <form onSubmit={handleSubmit}>
