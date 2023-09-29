@@ -95,6 +95,9 @@ export default function Page({ params }: { params: { slug: string } }) {
       <div>My Post: {params.slug}</div>
       <div>Yesterdays Date: {previousDayDate}</div>
       <div>Yesterdays weather: {JSON.stringify(weatherData)}</div>
+      <div>Yesterdays percipitation: {JSON.stringify(weatherData?.percipitation)}</div>
+      <div>Yesterdays wind: {JSON.stringify(weatherData?.wind)}</div>
+
       <div>My Id: {user}</div>
     </>
   );
