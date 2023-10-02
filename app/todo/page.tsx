@@ -51,7 +51,7 @@ export default async function Todo() {
           </div>
           <div className="flex items-center p-2 border rounded">
             <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
-            <div>
+            <div className="line-through">
               Integrate a weather api to display 10 day percipitation schedule
               and notable info
             </div>
