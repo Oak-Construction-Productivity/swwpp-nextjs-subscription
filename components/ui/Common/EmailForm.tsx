@@ -1,14 +1,28 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 
-const EmailForm =() => {
+const EmailForm = (props) => {
   const [formData, setFormData] = useState({
-    subject: '',
-    message: '',
+    date: '',
+    precipitation: '',
     description: '',
     emailTo: '',
     weatherNotes: '',
     fieldConditionsNotes: '',
   });
+
+  // Assume you have useEffect data for the following fields
+  //const projectName = 'Project Name Data';
+  //const projectAddress = 'Project Address Data';
+  //const lattitude = 'Latitude Data';
+  //const longitude = 'Longitude Data';
+  //const projectDescription = 'Project Description Data';
+  //const projectNumber = 'Project Number Data';
+  //const agency = 'Agency Data';
+  //const responsibleParty = 'Responsible Party Data';
+
+  useEffect(() => {
+    // You can fetch and set the data here if needed
+  }, []);
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -27,23 +41,59 @@ const EmailForm =() => {
 
   return (
     <div className="bg-gradient-to-b from-white to-gray-200 p-6 rounded-lg text-black">
-      <h1 className="text-center text-2xl font-bold mb-4">Send SWPPP Report Via Email Now</h1>
+      <h1 className="text-center text-2xl font-bold mb-4">Report Generator: Send SWPPP Report Via Email Now</h1>
+      <div className="mb-4">
+        <label className="font-bold">Project Name:</label>
+        <span className="ml-2">{props.projectName}</span>
+      </div>
+      <div className="mb-4">
+        <label className="font-bold">Project Address:</label>
+        <span className="ml-2">{props.projectAddress}</span>
+        <span className="ml-2">{props.town}</span>
+        <span className="ml-2">{props.state}</span>
+      </div>
+
+      <div className="mb-4">
+        <label className="font-bold">Latitude:</label>
+        <span className="ml-2">{props.lattitude}</span>
+      </div>
+      <div className="mb-4">
+        <label className="font-bold">Longitude:</label>
+        <span className="ml-2">{props.longitude}</span>
+      </div>
+      <div className="mb-4">
+        <label className="font-bold">Project Description:</label>
+        <span className="ml-2">{props.projectDescription}</span>
+      </div>
+      <div className="mb-4">
+        <label className="font-bold">Project Number:</label>
+        <span className="ml-2">{props.projectNumber}</span>
+      </div>
+      <div className="mb-4">
+        <label className="font-bold">Agency:</label>
+        <span className="ml-2">{props.agency}</span>
+      </div>
+      <div className="mb-4">
+        <label className="font-bold">Responsible Party:</label>
+        <span className="ml-2">{props.responsibleParty}</span>
+      </div>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div className="flex flex-col">
-          <label className="font-bold">Subject:</label>
+          <label className="font-bold">Date:</label>
           <input
             type="text"
-            name="subject"
-            value={formData.subject}
+            name="date"
+            value={formData.date}
             onChange={handleChange}
             className="px-4 py-2 border border-gray-300 rounded-lg"
           />
         </div>
         <div className="flex flex-col">
-          <label className="font-bold">Message:</label>
-          <textarea
-            name="message"
-            value={formData.message}
+          <label className="font-bold">Precipitation:</label>
+          <input
+            type="text"
+            name="precipitation"
+            value={formData.precipitation}
             onChange={handleChange}
             className="px-4 py-2 border border-gray-300 rounded-lg"
           />

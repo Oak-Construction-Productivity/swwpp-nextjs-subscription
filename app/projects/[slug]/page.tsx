@@ -15,7 +15,7 @@ if (!supabaseKey) {
 }
 const superbase = createClient(supabaseUrl, supabaseKey);
 
-type UserType = string | null;
+type UserType = string | null | any;
 type ProjectType = any;
 
 export default function Page({ params }: { params: { slug: string } }) {
@@ -26,6 +26,14 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [weatherDataThree, setWeatherDataThree] = useState<UserType>(null);
   const [weatherDataFour, setWeatherDataFour] = useState<UserType>(null);
   const [weatherDataFive, setWeatherDataFive] = useState<UserType>(null);
+  const [projectName, setProjectName] = useState<UserType>(null);
+  const [projectAddress, setProjectAddress] = useState<UserType>(null);
+  const [state, setState] = useState<UserType>(null);
+  const [town, setTown] = useState<UserType>(null);
+  const [projectDescription, setProjectDescription] = useState<UserType>(null);
+  const [projectNumber, setProjectNumber] = useState<UserType>(null);
+  const [agency, setAgency] = useState<UserType>(null);
+  const [responsibleParty, setResponsibleParty] = useState<UserType>(null);
   const [long, setLong] = useState<UserType>(null);
   const [lat, setLat] = useState<UserType>(null);
   const [projects, setProjects] = useState<ProjectType[]>([]);
@@ -66,6 +74,14 @@ export default function Page({ params }: { params: { slug: string } }) {
               setError(error.message);
             } else {
               setProjects(projects || []);
+              setProjectName(projects?.[0].project_name)
+              setProjectDescription(projects?.[0].project_description)
+              setProjectNumber(projects?.[0].project_id)
+              setProjectAddress(projects?.[0].project_address)
+              setAgency(projects?.[0].agency)
+              setResponsibleParty(projects?.[0].responsible_party)
+              setState(projects?.[0].project_state)
+              setTown(projects?.[0].project_town)
               setLat(projects?.[0].lattitude)
               setLong(projects?.[0].longitude)
               console.log(projects?.[0].project_name)
@@ -96,6 +112,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 .catch((error) => {
                   console.error('Error fetching weather data:', error);
                 });
+                console.log(weatherData)
                 fetch(apiUrlThree)
                 .then((response) => response.json())
                 .then((data) => {
@@ -142,8 +159,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     <>
     <div className="flex justify-between">
         <div className="w-3/4 p-4">
-            <div>Job ID: {params.slug}</div>
-            <div>My Id: {user}</div>
+            <div>Choose a day to fill into the report generator</div>
             <div className="day-box bg-gradient-to-r from-gray-200 to-gray-100 p-4 rounded-lg shadow-md">
             <div className="text-black">Yesterdays Date: {previousDayDate}</div>
             <div className="text-black">Yesterdays weather: {JSON.stringify(weatherData)}</div>
@@ -167,7 +183,6 @@ export default function Page({ params }: { params: { slug: string } }) {
             <div className="text-black">Three Days Previous Date Weather: {JSON.stringify(weatherDataThree)}</div>
             <div className="text-black">Three Days Previous Date Precipitation: {JSON.stringify(weatherDataThree?.precipitation)}</div>
             <div className="text-black">Three Days Previous Date Wind: {JSON.stringify(weatherDataThree?.wind)}</div>
-            <div className="text-black">Two Days Previous Date Wind: {JSON.stringify(weatherDataTwo?.wind)}</div>
                 <div>
                   <button className="bg-black text-white py-2 px-4 rounded">Fill</button>
                 </div>
@@ -192,7 +207,17 @@ export default function Page({ params }: { params: { slug: string } }) {
             </div>
         </div>
         <div className="w-1/4 p-4">
-            <EmailForm />
+            <EmailForm     
+              projectName={projectName}
+              projectAddress={projectAddress}
+              state={state}
+              town={town}
+              latitude={lat}
+              longitude={long}
+              projectDescription={projectDescription}
+              projectNumber={projectNumber}
+              agency={agency}
+              responsibleParty={responsibleParty}/>
         </div>
     </div>
     </>
