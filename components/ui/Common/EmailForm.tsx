@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 
-const EmailForm = (props) => {
+const EmailForm = (props:any) => {
   const [formData, setFormData] = useState({
     date: '',
     precipitation: '',
@@ -139,7 +139,7 @@ const EmailForm = (props) => {
           type="submit"
           className="bg-black text-white py-2 px-4 rounded-lg cursor-pointer"
         >
-          Send Email
+          Send Email and PDF Report
         </button>
       </form>
     </div>

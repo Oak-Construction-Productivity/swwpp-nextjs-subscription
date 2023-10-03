@@ -31,6 +31,17 @@ export default async function Todo() {
               Display projects on the project page
             </div>
           </div>
+          <div className="flex items-center p-2 border rounded">
+            <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
+            <div className="line-through">Slug project page</div>
+          </div>
+          <div className="flex items-center p-2 border rounded">
+            <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
+            <div className="line-through">
+              Integrate a weather api to display 10 day percipitation schedule
+              and notable info
+            </div>
+          </div>
           <div className="flex items-center mb-2 p-2 border rounded">
             <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
             <div>
@@ -47,13 +58,20 @@ export default async function Todo() {
           </div>
           <div className="flex items-center p-2 border rounded">
             <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
-            <div className="line-through">Slug project page</div>
+            <div >
+              Make the fill buttons work in the form area. 
+            </div>
           </div>
           <div className="flex items-center p-2 border rounded">
             <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
-            <div className="line-through">
-              Integrate a weather api to display 10 day percipitation schedule
-              and notable info
+            <div >
+              Make the pdf fill. 
+            </div>
+          </div>
+          <div className="flex items-center p-2 border rounded">
+            <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
+            <div >
+              Make the form execute an email send with an attached filled out pdf. 
             </div>
           </div>
           <div className="flex items-center p-2 border rounded">
@@ -72,11 +90,15 @@ export default async function Todo() {
           </div>
           <div className="flex items-center mb-2 p-2 border rounded">
             <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
-            <div>Improve the homepage and design</div>
+            <div>Attach Photos to the PDF</div>
           </div>
           <div className="flex items-center mb-2 p-2 border rounded">
             <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
             <div>Figure out report automation with stmp or something</div>
+          </div>
+          <div className="flex items-center mb-2 p-2 border rounded">
+            <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
+            <div>Improve the homepage and design</div>
           </div>
         </div>
       </div>
