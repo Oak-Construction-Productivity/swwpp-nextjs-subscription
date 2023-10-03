@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import EmailForm from '@/components/ui/Common/EmailForm';
 
 const supabase = createClientComponentClient();
 const supabaseUrl = 'https://eggvjyydqfibdrgfyyny.supabase.co';
@@ -36,7 +37,6 @@ export default function Page({ params }: { params: { slug: string } }) {
     const year = yesterday.getFullYear();
     const month = String(yesterday.getMonth() + 1).padStart(2, '0');
     const day = String(yesterday.getDate()).padStart(2, '0');
-
     return `${year}-${month}-${day}`;
   }
   const previousDayDate = getPreviousDayDate(1);
@@ -140,28 +140,61 @@ export default function Page({ params }: { params: { slug: string } }) {
   
   return (
     <>
-      <div>Job ID: {params.slug}</div>
-      <div>Yesterdays Date: {previousDayDate}</div>
-      <div>Yesterdays weather: {JSON.stringify(weatherData)}</div>
-      <div>Yesterdays percipitation: {JSON.stringify(weatherData?.percipitation)}</div>
-      <div>Yesterdays wind: {JSON.stringify(weatherData?.wind)}</div>
-      <div>Two Days Previous Date: {twoDaysDate}</div>
-      <div>Two Days Previous Date Weather: {JSON.stringify(weatherDataTwo)}</div>
-      <div>Two Days Previous Date Percipitation: {JSON.stringify(weatherDataTwo?.percipitation)}</div>
-      <div>Two Days Previous Date wind: {JSON.stringify(weatherDataTwo?.wind)}</div>
-      <div>Three Days Previous Date: {threeDaysDate}</div>
-      <div>Three Days Previous Date Weather: {JSON.stringify(weatherDataThree)}</div>
-      <div>Three Days Previous Date Percipitation: {JSON.stringify(weatherDataThree?.percipitation)}</div>
-      <div>Three Days Previous Date wind: {JSON.stringify(weatherDataThree?.wind)}</div>
-      <div>Four Days Previous Date: {fourDaysDate}</div>
-      <div>Four Days Previous Date Weather: {JSON.stringify(weatherDataFour)}</div>
-      <div>Four Days Previous Date Percipitation: {JSON.stringify(weatherDataFour?.percipitation)}</div>
-      <div>Four Days Previous Date wind: {JSON.stringify(weatherDataFour?.wind)}</div>
-      <div>Five Days Previous Date: {fiveDaysDate}</div>
-      <div>Five Days Previous Date Weather: {JSON.stringify(weatherDataFive)}</div>
-      <div>Five Days Previous Date Percipitation: {JSON.stringify(weatherDataFive?.percipitation)}</div>
-      <div>Five Days Previous Date wind: {JSON.stringify(weatherDataFive?.wind)}</div>
-      <div>My Id: {user}</div>
+    <div className="flex justify-between">
+        <div className="w-3/4 p-4">
+            <div>Job ID: {params.slug}</div>
+            <div>My Id: {user}</div>
+            <div className="day-box bg-gradient-to-r from-gray-200 to-gray-100 p-4 rounded-lg shadow-md">
+            <div className="text-black">Yesterdays Date: {previousDayDate}</div>
+            <div className="text-black">Yesterdays weather: {JSON.stringify(weatherData)}</div>
+            <div className="text-black">Yesterdays precipitation: {JSON.stringify(weatherData?.precipitation)}</div>
+            <div className="text-black">Yesterdays wind: {JSON.stringify(weatherData?.wind)}</div>
+                <div>
+                <button className="bg-black text-white py-2 px-4 rounded">Fill</button>
+                </div>
+            </div>
+            <div className="day-box bg-gradient-to-r from-gray-200 to-gray-100 p-4 rounded-lg shadow-md">
+            <div className="text-black">Two Days Previous Date: {twoDaysDate}</div>
+            <div className="text-black">Two Days Previous Date Weather: {JSON.stringify(weatherDataTwo)}</div>
+            <div className="text-black">Two Days Previous Date Precipitation: {JSON.stringify(weatherDataTwo?.precipitation)}</div>
+            <div className="text-black">Two Days Previous Date Wind: {JSON.stringify(weatherDataTwo?.wind)}</div>
+                <div>
+                  <button className="bg-black text-white py-2 px-4 rounded">Fill</button>
+                </div>
+            </div>
+            <div className="day-box bg-gradient-to-r from-gray-200 to-gray-100 p-4 rounded-lg shadow-md">
+            <div className="text-black">Three Days Previous Date: {threeDaysDate}</div>
+            <div className="text-black">Three Days Previous Date Weather: {JSON.stringify(weatherDataThree)}</div>
+            <div className="text-black">Three Days Previous Date Precipitation: {JSON.stringify(weatherDataThree?.precipitation)}</div>
+            <div className="text-black">Three Days Previous Date Wind: {JSON.stringify(weatherDataThree?.wind)}</div>
+            <div className="text-black">Two Days Previous Date Wind: {JSON.stringify(weatherDataTwo?.wind)}</div>
+                <div>
+                  <button className="bg-black text-white py-2 px-4 rounded">Fill</button>
+                </div>
+            </div>
+            <div className="day-box bg-gradient-to-r from-gray-200 to-gray-100 p-4 rounded-lg shadow-md">
+            <div className="text-black">Four Days Previous Date: {fourDaysDate}</div>
+            <div className="text-black">Four Days Previous Date Weather: {JSON.stringify(weatherDataFour)}</div>
+            <div className="text-black">Four Days Previous Date Precipitation: {JSON.stringify(weatherDataFour?.precipitation)}</div>
+            <div className="text-black">Four Days Previous Date Wind: {JSON.stringify(weatherDataFour?.wind)}</div>
+            <div>
+                  <button className="bg-black text-white py-2 px-4 rounded">Fill</button>
+                </div>
+            </div>
+            <div className="day-box bg-gradient-to-r from-gray-200 to-gray-100 p-4 rounded-lg shadow-md">
+            <div className="text-black">Five Days Previous Date: {fiveDaysDate}</div>
+            <div className="text-black">Five Days Previous Date Weather: {JSON.stringify(weatherDataFive)}</div>
+            <div className="text-black">Five Days Previous Date Precipitation: {JSON.stringify(weatherDataFive?.precipitation)}</div>
+            <div className="text-black">Five Days Previous Date Wind: {JSON.stringify(weatherDataFive?.wind)}</div>
+            <div>
+                  <button className="bg-black text-white py-2 px-4 rounded">Fill</button>
+                </div>
+            </div>
+        </div>
+        <div className="w-1/4 p-4">
+            <EmailForm />
+        </div>
+    </div>
     </>
   );
 }
