@@ -32,6 +32,9 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [town, setTown] = useState<UserType>(null);
   const [projectDescription, setProjectDescription] = useState<UserType>(null);
   const [projectNumber, setProjectNumber] = useState<UserType>(null);
+  const [emailTo, setEmailTo] = useState<UserType>(null);
+  const [emailFrom, setEmailFrom] = useState<UserType>(null);
+  const [dateSubmitted, setDateSubmitted] = useState<UserType>(null);
   const [agency, setAgency] = useState<UserType>(null);
   const [responsibleParty, setResponsibleParty] = useState<UserType>(null);
   const [long, setLong] = useState<UserType>(null);
@@ -84,6 +87,8 @@ export default function Page({ params }: { params: { slug: string } }) {
               setTown(projects?.[0].project_town)
               setLat(projects?.[0].lattitude)
               setLong(projects?.[0].longitude)
+              setEmailFrom(projects?.[0].email_from);
+              setEmailTo(projects?.[0].email_to);
               console.log(projects?.[0].project_name)
               console.log(projects?.[0].lattitude)
               console.log(projects?.[0].longitude)
@@ -211,6 +216,9 @@ export default function Page({ params }: { params: { slug: string } }) {
               projectName={projectName}
               projectAddress={projectAddress}
               state={state}
+              dateSubmitted={dateSubmitted}
+              emailTo={emailTo}
+              emailFrom={emailFrom}
               town={town}
               lattitude={lat}
               longitude={long}

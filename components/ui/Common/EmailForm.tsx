@@ -1,4 +1,9 @@
 import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
+import emailjs from '@emailjs/browser';
+
+interface TemplateParams {
+  [key: string]: any;
+}
 
 const EmailForm = (props:any) => {
   const [formData, setFormData] = useState({
@@ -9,6 +14,10 @@ const EmailForm = (props:any) => {
     weatherNotes: '',
     fieldConditionsNotes: '',
   });
+
+  const EMAILJS_SERVICE_ID: any = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
+  const EMAILJS_TEMPLATE_ID: any = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
+  const EMAILJS_PUBLIC_KEY: any =process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
 
   // Assume you have useEffect data for the following fields
   //const projectName = 'Project Name Data';
@@ -34,9 +43,21 @@ const EmailForm = (props:any) => {
     });
   };
 
+  const templateParams: TemplateParams = {
+    date: '10-10-2023',
+    project_name: 'Beards Hill',
+    email_from: 'ira@amiconstruction.com',
+    email_to:"iraf333@gmail.com"
+  };
+
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    // ... (submit logic)
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY)
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
   };
 
   return (
@@ -76,6 +97,10 @@ const EmailForm = (props:any) => {
       <div className="mb-4">
         <label className="font-bold">Responsible Party:</label>
         <span className="ml-2">{props.responsibleParty}</span>
+      </div>
+      <div className="mb-4">
+        <label className="font-bold">Date Submitted:</label>
+        <span className="ml-2">{props.dateSubmitted}</span>
       </div>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div className="flex flex-col">
