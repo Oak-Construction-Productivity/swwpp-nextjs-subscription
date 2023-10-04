@@ -212,7 +212,7 @@ export default function Page({ params }: { params: { slug: string } }) {
               projectAddress={projectAddress}
               state={state}
               town={town}
-              latitude={lat}
+              lattitude={lat}
               longitude={long}
               projectDescription={projectDescription}
               projectNumber={projectNumber}
