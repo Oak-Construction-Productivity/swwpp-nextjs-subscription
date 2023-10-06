@@ -75,7 +75,7 @@ const EmailForm = (props:any) => {
       </div>
 
       <div className="mb-4">
-        <label className="font-bold">Latitude:</label>
+        <label className="font-bold">Lattitude:</label>
         <span className="ml-2">{props.lattitude}</span>
       </div>
       <div className="mb-4">
