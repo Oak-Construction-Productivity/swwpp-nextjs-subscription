@@ -17,8 +17,12 @@
     "@supabase/auth-ui-react": "^0.4.2",
     "@supabase/auth-ui-shared": "^0.1.6",
     "@supabase/supabase-js": "^2.23.0",
+    "blob-stream": "^0.1.3",
     "classnames": "^2.3.2",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.6.0",
     "next": "13.4.3",
+    "pdfkit": "^0.13.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-merge-refs": "^2.0.2",
@@ -28,6 +32,7 @@
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^3.7.2",
     "@types/node": "^20.2.3",
+    "@types/pdfkit": "^0.12.12",
     "@types/react": "^18.2.7",
     "autoprefixer": "^10.4.14",
     "eslint": "^8.41.0",
@@ -46,5 +51,10 @@
     "singleQuote": true,
     "tabWidth": 2,
     "trailingComma": "none"
+  },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
   }
 }

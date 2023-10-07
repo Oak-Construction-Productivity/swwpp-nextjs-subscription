@@ -1,9 +1,11 @@
 import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
+import SWPPPReport from '@/components/util/SwpppReport';
 
 interface TemplateParams {
   [key: string]: any;
 }
+type AnyType = string | null | any;
 
 const EmailForm = (props:any) => {
   const [formData, setFormData] = useState({
@@ -14,6 +16,7 @@ const EmailForm = (props:any) => {
     weatherNotes: '',
     fieldConditionsNotes: '',
   });
+  const [submitted, setSubmitted] = useState<AnyType>(false);
 
   const EMAILJS_SERVICE_ID: any = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
   const EMAILJS_TEMPLATE_ID: any = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
@@ -33,6 +36,10 @@ const EmailForm = (props:any) => {
     // You can fetch and set the data here if needed
   }, []);
 
+  const resetSubmitted = () => {
+    setSubmitted(false);
+  };
+
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -41,23 +48,25 @@ const EmailForm = (props:any) => {
       ...formData,
       [name]: value,
     });
-  };
-
-  const templateParams: TemplateParams = {
-    date: '10-10-2023',
-    project_name: 'Beards Hill',
-    email_from: 'ira@amiconstruction.com',
-    email_to:"iraf333@gmail.com"
+    console.log(formData);
   };
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
+    setSubmitted(true);
+    /*
+    const templateParams: TemplateParams = {
+      date: '10-10-2023',
+      project_name: 'Beards Hill',
+      email_from: 'ira@amiconstruction.com',
+      email_to:"iraf333@gmail.com"
+    };
     emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY)
       .then((result) => {
           console.log(result.text);
       }, (error) => {
           console.log(error.text);
-      });
+      });*/
   };
 
   return (
@@ -166,6 +175,16 @@ const EmailForm = (props:any) => {
         >
           Send Email and PDF Report
         </button>
+        <SWPPPReport projectName={props.projectName}
+  projectLocation ={props.projectAddress}
+  projectDate ={formData.date}
+  precipitation={props.precipitation}
+  description={formData.description}
+  weatherNotes={formData.weatherNotes}
+  fieldConditionNotes={formData.fieldConditionsNotes}
+  userEmail={formData.emailTo}
+  submitted={submitted}
+  resetSubmitted={resetSubmitted}/>
       </form>
     </div>
   );
