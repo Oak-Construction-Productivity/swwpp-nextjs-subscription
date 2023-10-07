@@ -7,16 +7,36 @@ interface TemplateParams {
 }
 type AnyType = string | null | any;
 
-const EmailForm = (props:any) => {
+interface CallbackProps {
+  weatherData: any; // Define the type of weatherData as per your data structure
+  // ... other props
+  updateFormData: (newWeatherData: any) => void; // Callback function to update formData
+}
+
+const EmailForm = (props: any & CallbackProps) => {
   const [formData, setFormData] = useState({
     date: '',
     precipitation: '',
     description: '',
     emailTo: '',
+    emailFrom:'',
     weatherNotes: '',
     fieldConditionsNotes: '',
   });
   const [submitted, setSubmitted] = useState<AnyType>(false);
+
+  useEffect(() => {
+    // When props.weatherData changes, update the formData state
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      date: props.weatherData?.date || '',
+      precipitation: JSON.stringify(props.weatherData?.precipitation) || '',
+      weatherNotes: JSON.stringify(props.weatherData) || "",
+      emailTo: props.emailTo || "",
+      emailFrom: props.emailFrom || "",
+      // Update other formData fields as needed
+    }));
+  }, [props.weatherData]);
 
   const EMAILJS_SERVICE_ID: any = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
   const EMAILJS_TEMPLATE_ID: any = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
@@ -121,6 +141,8 @@ const EmailForm = (props:any) => {
           <input
             type="text"
             name="date"
+            placeholder={JSON.stringify(props.weatherData?.date)}
+            defaultValue={JSON.stringify(props.weatherData?.date)}
             value={formData.date}
             onChange={handleChange}
             className="px-4 py-2 border border-gray-300 rounded-lg"
@@ -131,6 +153,8 @@ const EmailForm = (props:any) => {
           <input
             type="text"
             name="precipitation"
+            placeholder={JSON.stringify(props.weatherData?.precipitation)}
+            defaultValue={JSON.stringify(props.weatherData?.precipitation)}
             value={formData.precipitation}
             onChange={handleChange}
             className="px-4 py-2 border border-gray-300 rounded-lg"
@@ -175,6 +199,8 @@ const EmailForm = (props:any) => {
           <label className="font-bold">Weather Notes:</label>
           <textarea
             name="weatherNotes"
+            placeholder={JSON.stringify(props.weatherData)}
+            defaultValue={JSON.stringify(props.weatherData)}
             value={formData.weatherNotes}
             onChange={handleChange}
             className="px-4 py-2 border border-gray-300 rounded-lg"
@@ -204,12 +230,12 @@ const EmailForm = (props:any) => {
           responsibleParty={props.responsibleParty}
           state={props.state}
           projectDate ={formData.date}
-          precipitation={props.precipitation}
+          precipitation={formData.precipitation}
           description={formData.description}
           weatherNotes={formData.weatherNotes}
           fieldConditionNotes={formData.fieldConditionsNotes}
           userEmail={formData.emailTo}
-          emailFrom={props.emailFrom}
+          emailFrom={formData.emailFrom}
           submitted={submitted}
           resetSubmitted={resetSubmitted}/>
       </form>

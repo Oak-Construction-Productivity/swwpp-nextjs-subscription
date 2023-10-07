@@ -18,6 +18,11 @@ const superbase = createClient(supabaseUrl, supabaseKey);
 
 type UserType = string | null | any;
 type ProjectType = any;
+interface WeatherData {
+  date: string;
+  precipitation: string;
+  // Other fields
+}
 
 export default function Page({ params }: { params: { slug: string } }) {
   const [user, setUser] = useState<UserType>(null);
@@ -41,6 +46,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [long, setLong] = useState<UserType>(null);
   const [lat, setLat] = useState<UserType>(null);
   const [projects, setProjects] = useState<ProjectType[]>([]);
+  const [selectedDay, setSelectedDay] = useState<number | null>(null);
 
   function getPreviousDayDate(dayBehind: number): string {
     const today = new Date();
@@ -56,6 +62,11 @@ export default function Page({ params }: { params: { slug: string } }) {
   const threeDaysDate = getPreviousDayDate(3);
   const fourDaysDate = getPreviousDayDate(4);
   const fiveDaysDate = getPreviousDayDate(5);
+
+  const handleFillDay = (dayIndex: number) => {
+    setSelectedDay(dayIndex);
+    console.log(weatherData)
+  };
 
   //useEffect to retrieve the user info, make sure it matches the user.id of the project number
   // return the project information to render, pass the latitude coordinates to the weather api function
@@ -176,7 +187,7 @@ export default function Page({ params }: { params: { slug: string } }) {
               Yesterdays wind: {JSON.stringify(weatherData?.wind)}
             </div>
             <div>
-              <button className="bg-black text-white py-2 px-4 rounded">
+              <button className="bg-black text-white py-2 px-4 rounded"onClick={() => handleFillDay(0)}>
                 Fill
               </button>
             </div>
@@ -197,7 +208,7 @@ export default function Page({ params }: { params: { slug: string } }) {
               {JSON.stringify(weatherDataTwo?.wind)}
             </div>
             <div>
-              <button className="bg-black text-white py-2 px-4 rounded">
+              <button className="bg-black text-white py-2 px-4 rounded" onClick={() => handleFillDay(1)}>
                 Fill
               </button>
             </div>
@@ -219,7 +230,7 @@ export default function Page({ params }: { params: { slug: string } }) {
               {JSON.stringify(weatherDataThree?.wind)}
             </div>
             <div>
-              <button className="bg-black text-white py-2 px-4 rounded">
+              <button className="bg-black text-white py-2 px-4 rounded" onClick={() => handleFillDay(2)}>
                 Fill
               </button>
             </div>
@@ -240,7 +251,7 @@ export default function Page({ params }: { params: { slug: string } }) {
               {JSON.stringify(weatherDataFour?.wind)}
             </div>
             <div>
-              <button className="bg-black text-white py-2 px-4 rounded">
+              <button className="bg-black text-white py-2 px-4 rounded" onClick={() => handleFillDay(3)}>
                 Fill
               </button>
             </div>
@@ -261,7 +272,7 @@ export default function Page({ params }: { params: { slug: string } }) {
               {JSON.stringify(weatherDataFive?.wind)}
             </div>
             <div>
-              <button className="bg-black text-white py-2 px-4 rounded">
+              <button className="bg-black text-white py-2 px-4 rounded" onClick={() => handleFillDay(4)}>
                 Fill
               </button>
             </div>
@@ -282,6 +293,24 @@ export default function Page({ params }: { params: { slug: string } }) {
             projectNumber={projectNumber}
             agency={agency}
             responsibleParty={responsibleParty}
+            weatherData={
+              selectedDay === 0
+                ? weatherData
+                : selectedDay === 1
+                ? weatherDataTwo
+                : selectedDay === 2
+                ? weatherDataThree
+                : selectedDay === 3
+                ? weatherDataFour
+                : selectedDay === 4
+                ? weatherDataFive
+                : null
+            }
+          updateFormData={(newWeatherData: WeatherData) => {
+              // Handle the updated weather data here if needed
+              // This function will be called when date or precipitation changes
+              console.log("Updated weather data:", newWeatherData);
+            }}
           />
         </div>
       </div>
