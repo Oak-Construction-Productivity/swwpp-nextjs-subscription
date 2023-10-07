@@ -111,6 +111,10 @@ const EmailForm = (props:any) => {
         <label className="font-bold">Date Submitted:</label>
         <span className="ml-2">{props.dateSubmitted}</span>
       </div>
+      <div className="mb-4">
+        <label className="font-bold">Emailing From:</label>
+        <span className="ml-2">{props.emailFrom}</span>
+      </div>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div className="flex flex-col">
           <label className="font-bold">Date:</label>
@@ -136,6 +140,8 @@ const EmailForm = (props:any) => {
           <label className="font-bold">Description:</label>
           <textarea
             name="description"
+            defaultValue={props.description}
+            placeholder={props.description}
             value={formData.description}
             onChange={handleChange}
             className="px-4 py-2 border border-gray-300 rounded-lg"
@@ -146,6 +152,20 @@ const EmailForm = (props:any) => {
           <input
             type="text"
             name="emailTo"
+            defaultValue={props.emailTo}
+            placeholder={props.emailTo}
+            value={formData.emailTo}
+            onChange={handleChange}
+            className="px-4 py-2 border border-gray-300 rounded-lg"
+          />
+        </div>
+        <div className="flex flex-col">
+          <label className="font-bold">Email From:</label>
+          <input
+            type="text"
+            name="emailTo"
+            defaultValue={props.emailFrom}
+            placeholder={props.emailFrom}
             value={formData.emailTo}
             onChange={handleChange}
             className="px-4 py-2 border border-gray-300 rounded-lg"
@@ -176,15 +196,22 @@ const EmailForm = (props:any) => {
           Send Email and PDF Report
         </button>
         <SWPPPReport projectName={props.projectName}
-  projectLocation ={props.projectAddress}
-  projectDate ={formData.date}
-  precipitation={props.precipitation}
-  description={formData.description}
-  weatherNotes={formData.weatherNotes}
-  fieldConditionNotes={formData.fieldConditionsNotes}
-  userEmail={formData.emailTo}
-  submitted={submitted}
-  resetSubmitted={resetSubmitted}/>
+          projectLocation ={props.projectAddress}
+          town={props.town}
+          lat={props.lattitude}
+          long={props.longitude}
+          agency={props.agency}
+          responsibleParty={props.responsibleParty}
+          state={props.state}
+          projectDate ={formData.date}
+          precipitation={props.precipitation}
+          description={formData.description}
+          weatherNotes={formData.weatherNotes}
+          fieldConditionNotes={formData.fieldConditionsNotes}
+          userEmail={formData.emailTo}
+          emailFrom={props.emailFrom}
+          submitted={submitted}
+          resetSubmitted={resetSubmitted}/>
       </form>
     </div>
   );

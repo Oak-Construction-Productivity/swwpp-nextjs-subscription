@@ -58,20 +58,17 @@ export default async function Todo() {
           </div>
           <div className="flex items-center p-2 border rounded">
             <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
-            <div >
-              Make the fill buttons work in the form area. 
-            </div>
+            <div>Make the fill buttons work in the form area.</div>
           </div>
           <div className="flex items-center p-2 border rounded">
             <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
-            <div >
-              Make the pdf fill. 
-            </div>
+            <div>Make the pdf fill.</div>
           </div>
           <div className="flex items-center p-2 border rounded">
             <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
-            <div >
-              Make the form execute an email send with an attached filled out pdf. 
+            <div>
+              Make the form execute an email send with an attached filled out
+              pdf.
             </div>
           </div>
           <div className="flex items-center p-2 border rounded">

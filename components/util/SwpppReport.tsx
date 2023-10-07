@@ -7,11 +7,18 @@ interface SWPPPReportProps {
   // Props for project details
   projectName: string;
   projectLocation: string;
+  town:string;
+  state:string
   projectDate: string;
   precipitation: string;
   description: string;
   weatherNotes: string;
   fieldConditionNotes: string;
+  lat:string;
+  long:string;
+  agency:string;
+  responsibleParty:string;
+  emailFrom:string;
   submitted: boolean;
   userEmail: string;
   resetSubmitted: () => void;
@@ -25,6 +32,13 @@ interface emailParams {
 const SWPPPReport: React.FC<SWPPPReportProps> = ({
   projectName,
   projectLocation,
+  town,
+  lat,
+  long,
+  agency,
+  responsibleParty,
+  emailFrom,
+  state,
   projectDate,
   precipitation,
   description,
@@ -45,33 +59,77 @@ const SWPPPReport: React.FC<SWPPPReportProps> = ({
       html2canvas(divToPrintRef.current).then((canvas) => {
         const imgData = canvas.toDataURL('image/png');
         const pdf = new jsPDF();
-
-        // Define content for the PDF
-        const content = `
-          Project Name: ${projectName}
-          Project Location: ${projectLocation}
-          Project Date: ${projectDate}
+  
+        // Set font size and style
+        pdf.setFontSize(16);
+        pdf.setFont('bold');
+  
+        // Title: Daily SWPPP Report
+        pdf.text(`Daily SWPPP Report For ${projectDate}`, 70, 20, { align: 'center' });
+  
+        // Reset font size and style
+        pdf.setFontSize(12);
+        pdf.setFont('normal');
+  
+        // Overview section
+        pdf.text('Overview:', 10, 40);
+        pdf.rect(10, 45, 190, 0.1, 'F'); // Horizontal line under the section title
+  
+        // Project Details section
+        pdf.text('Project Details:', 10, 100);
+        pdf.rect(10, 105, 190, 0.1, 'F'); // Horizontal line under the section title
+  
+        // Content in the Overview section
+        const projectDetailsContent = `
           Precipitation: ${precipitation}
           Description: ${description}
           Weather Notes: ${weatherNotes}
           Field Condition Notes: ${fieldConditionNotes}
         `;
-
-        //pdf.addImage(imgData, 'JPEG', 0, 50);
-        pdf.text(10, 10, 'Daily Report'); // Title
-        pdf.text(10, 20, content); // Content
-
+  
+        // Content in the Project Details section
+        const overviewContent = `
+          Project Name: ${projectName}
+          Project Description: ${description}
+          Project Location: ${projectLocation} ${town} ${state}
+          Project Date: ${projectDate}
+          Agency: ${agency}
+          Longitude: ${long}
+          Lattitude: ${lat}
+        `;
+  
+        // Add the content to the PDF
+        pdf.text(overviewContent, 10, 55); // Increased spacing
+        pdf.text(projectDetailsContent, 10, 115); // Only one line spacing
+  
+        // Footer line above footer text
+        pdf.setLineWidth(0.1);
+        pdf.line(10, 265, 200, 265); // Horizontal line above the footer text
+        pdf.text(`${responsibleParty}`, 10, 275);
+  
+        // Add images in boxes
+        const imageUrls = ["url1", "url2", "url3", "url"]; // Replace with your image URLs
+        let xOffset = 10;
+        for (let i = 0; i < imageUrls.length; i++) {
+          if (imageUrls[i]) {
+            pdf.addImage(imageUrls[i], 'JPEG', xOffset, 210, 40, 40); // Image box size: 40x40
+          } else {
+            pdf.rect(xOffset, 210, 40, 40); // Empty image box
+          }
+          xOffset += 50; // Adjust the spacing between image boxes
+        }
+  
         sendEmailWithAttachment(pdf.output('blob'));
       });
-    }}
+    }
+  };
   
     const sendEmailWithAttachment = (pdfBlob: Blob) => {
-      console.log(userEmail, "email here");
       const emailParams = {
         email_to: userEmail,
-        email_from: 'ira@amiconstruction.com',
+        email_from: emailFrom,
         project_name: projectName,
-        date: '10-10-2023',
+        date: projectDate,
         content: "fill",
       };
   
