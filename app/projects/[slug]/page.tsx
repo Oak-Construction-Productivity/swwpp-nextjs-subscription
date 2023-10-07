@@ -171,9 +171,9 @@ export default function Page({ params }: { params: { slug: string } }) {
 
   return (
     <>
+    <div>Choose a day to fill into the report generator</div>
       <div className="flex justify-between">
-        <div className="w-3/4 p-4">
-          <div>Choose a day to fill into the report generator</div>
+        <div className="w-1/2 p-4">
           <div className="day-box bg-gradient-to-r from-gray-200 to-gray-100 p-4 rounded-lg shadow-md">
             <div className="text-black">Yesterdays Date: {previousDayDate}</div>
             <div className="text-black">
@@ -278,7 +278,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             </div>
           </div>
         </div>
-        <div className="w-1/4 p-4">
+        <div className="w-1/2 p-4">
           <EmailForm
             projectName={projectName}
             projectAddress={projectAddress}

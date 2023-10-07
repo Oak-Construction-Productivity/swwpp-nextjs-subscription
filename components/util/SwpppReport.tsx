@@ -83,7 +83,9 @@ const SWPPPReport: React.FC<SWPPPReportProps> = ({
         const projectDetailsContent = `
           Precipitation: ${precipitation}
           Description: ${description}
-          Weather Notes: ${weatherNotes}
+          Weather Notes: ${weatherNotes.slice(89,160)}
+           ${weatherNotes.slice(160,260)}
+           ${weatherNotes.slice(260,362)}
           Field Condition Notes: ${fieldConditionNotes}
         `;
   

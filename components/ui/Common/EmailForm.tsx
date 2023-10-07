@@ -34,6 +34,7 @@ const EmailForm = (props: any & CallbackProps) => {
       weatherNotes: JSON.stringify(props.weatherData) || "",
       emailTo: props.emailTo || "",
       emailFrom: props.emailFrom || "",
+      description: props.projectDescription || "",
       // Update other formData fields as needed
     }));
   }, [props.weatherData]);
