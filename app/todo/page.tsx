@@ -42,20 +42,6 @@ export default async function Todo() {
               and notable info
             </div>
           </div>
-          <div className="flex items-center mb-2 p-2 border rounded">
-            <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
-            <div>
-              Form handeling and not letting non payers add more than one/two
-              projects
-            </div>
-          </div>
-          <div className="flex items-center mb-2 p-2 border rounded">
-            <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
-            <div>
-              Create a button/utility function that successfully deletes the
-              project, in project settings
-            </div>
-          </div>
           <div className="flex items-center p-2 border rounded">
             <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
             <div className="line-through">Make the fill buttons work in the form area.</div>
@@ -76,6 +62,26 @@ export default async function Todo() {
             <div className="line-through">
               In project page, allow for info to be added then a button to send
               email report
+            </div>
+          </div>
+          <div className="flex items-center mb-2 p-2 border rounded">
+            <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
+            <div>
+              Form handeling and not letting non payers add more than one/two
+              projects
+            </div>
+          </div>
+          <div className="flex items-center mb-2 p-2 border rounded">
+            <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
+            <div>
+              Edit Project Slug Page w/ Delete also
+            </div>
+          </div>
+          <div className="flex items-center mb-2 p-2 border rounded">
+            <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
+            <div>
+              Create a button/utility function that successfully deletes the
+              project, in project settings
             </div>
           </div>
           <div className="flex items-center mb-2 p-2 border rounded">
