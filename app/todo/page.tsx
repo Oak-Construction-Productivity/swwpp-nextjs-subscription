@@ -94,7 +94,7 @@ export default async function Todo() {
             <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
             <div>
               Create a button/utility function that successfully deletes the
-              project, in project settings
+              project, in project settings a test change here
             </div>
           </div>
           <div className="flex items-center mb-2 p-2 border rounded">
