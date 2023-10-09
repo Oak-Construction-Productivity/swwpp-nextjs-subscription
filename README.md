@@ -26,7 +26,7 @@ Before Commits -> Run ```yarn run build``` or ```npm run build``` -> Ensure a cl
 
 Upon clean build commit and open pull requests. 
 
-**It is the contributor/branch users responsibility to pull main changes in periodically or when changes are made on main.** Use this to help -> [Do not rebase, merge instead like so]([https://stackoverflow.com/a/69575675](https://stackoverflow.com/a/74695315))
+**It is the contributor/branch users responsibility to pull main changes in periodically or when changes are made on main.** Use this to help -> [Do not rebase, merge instead like so](https://stackoverflow.com/a/74695315)
 
 ## Develop locally
 
