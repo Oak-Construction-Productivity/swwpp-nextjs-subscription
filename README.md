@@ -19,9 +19,13 @@
 
 ## Contribution Instructions
 Never work on main, only pull request to main from respective branch
-Work on branch and pull request in
+
+Work on respective branch and pull request in
+
 Before Commits -> Run ```yarn run build``` or ```npm run build``` -> Ensure a clean build is pushed to your branch before commiting 
+
 Upon clean build commit and open pull requests. 
+
 **It is the contributor/branch user responsibility to pull main changes in periodically or when changes are made on main.** Use this to help -> [**Do not rebase, merge instead like so**]([https://stackoverflow.com/a/69575675](https://stackoverflow.com/a/74695315))
 
 ## Develop locally
