@@ -150,6 +150,7 @@ const SWPPPReport: React.FC<SWPPPReportProps> = ({
             },
             (error) => {
               console.log(error.text);
+              alert(error.text);
               resetSubmitted();
             }
           );
