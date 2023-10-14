@@ -309,7 +309,7 @@ export default function Page({ params }: { params: { slug: string } }) {
           updateFormData={(newWeatherData: WeatherData) => {
               // Handle the updated weather data here if needed
               // This function will be called when date or precipitation changes
-              console.log("Updated weather data into the form:", newWeatherData);
+              console.log("Updated weather data into the form :) :", newWeatherData);
             }}
           />
         </div>
