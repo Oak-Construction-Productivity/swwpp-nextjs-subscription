@@ -5,9 +5,9 @@ import { redirect } from 'next/navigation';
 export default async function Todo() {
   const session = await getSession();
 
-  if (!session) {
+  /*if (!session) {
     return redirect('/signin');
-  }
+  }*/
 
   return (
     <div className="flex justify-center height-screen-helper">
@@ -104,6 +104,10 @@ export default async function Todo() {
           <div className="flex items-center mb-2 p-2 border rounded">
             <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
             <div>Figure out report automation with stmp or something</div>
+          </div>
+          <div className="flex items-center mb-2 p-2 border rounded">
+            <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
+            <div>Paginate the most recent days to call the previous week </div>
           </div>
           <div className="flex items-center mb-2 p-2 border rounded">
             <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
