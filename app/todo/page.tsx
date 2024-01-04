@@ -66,7 +66,7 @@ export default async function Todo() {
           </div>
           <div className="flex items-center mb-2 p-2 border rounded">
             <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
-            <div>
+            <div className="line-through">
               Form handeling and not letting non payers add more than one/two
               projects
             </div>

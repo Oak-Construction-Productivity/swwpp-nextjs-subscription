@@ -7,6 +7,7 @@ interface ProjectButtonProps {
   redirectTo: string;
   color?: string;
   size?: string;
+  click?: boolean;
   className?: string; // Add className prop
 }
 
@@ -14,6 +15,7 @@ const ProjectButton: FC<ProjectButtonProps> = ({
   redirectTo,
   color,
   size,
+  click,
   className
 }) => {
   // Define a default gradient class if color is not provided
@@ -21,18 +23,32 @@ const ProjectButton: FC<ProjectButtonProps> = ({
     color || 'bg-gradient-to-r from-orange-500 via-red-600 to-pink-500';
 
   return (
-    <Link href={redirectTo}>
+    <>
+      {click ? <Link href={redirectTo}>
       <div
+          className={`${
+            className ? className : '' // Allow custom classes
+          } ${gradientClass} w-${size || '100'} h-${
+            size || '100'
+          } rounded-full flex flex-col justify-center items-center text-white text-center cursor-pointer text-lg font-bold`}
+        >
+          <div style={{ fontSize: '30px' }}>+</div>
+          <div>Add Project</div>
+        </div>
+      </Link> :
+      <>
+        <div
         className={`${
           className ? className : '' // Allow custom classes
         } ${gradientClass} w-${size || '100'} h-${
           size || '100'
         } rounded-full flex flex-col justify-center items-center text-white text-center cursor-pointer text-lg font-bold`}
-      >
-        <div style={{ fontSize: '30px' }}>+</div>
-        <div>Add Project</div>
-      </div>
-    </Link>
+        >
+          <div style={{ fontSize: '30px' }}>+</div>
+          <div>Add Project</div>
+        </div>
+      </>}
+    </>
   );
 };
 

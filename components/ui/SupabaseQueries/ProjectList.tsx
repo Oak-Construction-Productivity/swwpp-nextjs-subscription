@@ -1,11 +1,12 @@
 'use client';
-
+import { getSession, getSubscription, getActiveProductsWithPrices } from '@/app/supabase-server';
 import Button from '@/components/ui/Button';
 import { Database } from '@/types_db';
 import { postData } from '@/utils/helpers';
 import { getStripe } from '@/utils/stripe-client';
 import { Session, User } from '@supabase/supabase-js';
 import { createClient } from '@supabase/supabase-js';
+import ProjectButton from '../Common/ProjectButton';
 import cn from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -24,12 +25,13 @@ import {
 interface Props {
   session: Session | null;
   user: User | null | undefined;
+  projectNumber: number;
 }
 
 type ErrorType = string | null;
 type ProjectType = any;
 
-export default function ProjectList({ session, user }: Props) {
+export default function ProjectList({ session, user, projectNumber }: Props) {
   const supabaseUrl = 'https://eggvjyydqfibdrgfyyny.supabase.co';
   const supabaseKey: string | undefined =
     process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY;
@@ -43,6 +45,10 @@ export default function ProjectList({ session, user }: Props) {
   const [projects, setProjects] = useState<ProjectType[]>([]);
   const [error, setError] = useState<ErrorType>(null);
   const basePath = '/slug/';
+  const [projectCount, setProjectCount] = useState<ProjectType>();
+  const [projectLimitBoolen, setProjectLimitBoolean] = useState<ProjectType>(true);
+  //setProjectCount(number);
+
 
   useEffect(() => {
     async function fetchProjects() {
@@ -56,21 +62,25 @@ export default function ProjectList({ session, user }: Props) {
           setError(error.message);
         } else {
           setProjects(projects || []);
-          console.log(projects);
-          console.log(error);
+          setProjectCount(projects?.length)
+          console.log(projects, "project count:")
+          if(projects?.length && projects.length >= projectNumber){
+            setProjectLimitBoolean(false);
+            console.log("set to false")
+          }
         }
       } catch (error: any) {
         setError(error.message);
       }
     }
-    console.log(projects, 'data displayed here');
+    console.log(projects.length, 'data displayed here');
     console.log(user?.id, 'user id here');
     fetchProjects();
   }, []);
 
   return (
     <div className="flex flex-col h-60vh">
-      {projects.map((project: any, index: Key | null | undefined) => (
+      {projects.slice(0, projectNumber).map((project: any, index: Key | null | undefined) => (
         <Link key={index} href={`${'projects/'}${project.id}`}>
           <div className="flex flex-col p-4 mb-4">
             <div className="border-2 border-gray-700 bg-gradient-to-b from-gray-200 to-gray-100 rounded-lg shadow-md p-4">
@@ -90,6 +100,13 @@ export default function ProjectList({ session, user }: Props) {
           </div>
         </Link>
       ))}
+        <ProjectButton
+          redirectTo="projects/add"
+          color="bg-gradient-to-r from-yellow-500 via-red-600 to-pink-500"
+          size="150"
+          click={projectLimitBoolen}
+          className="custom-class"
+        /> 
     </div>
   );
 }
