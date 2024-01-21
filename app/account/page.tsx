@@ -34,6 +34,8 @@ export default async function Account() {
       minimumFractionDigits: 0
     }).format((subscription?.prices?.unit_amount || 0) / 100);
 
+    
+
   const updateName = async (formData: FormData) => {
     'use server';
 

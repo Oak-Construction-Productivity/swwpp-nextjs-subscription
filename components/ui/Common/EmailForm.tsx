@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
 import SWPPPReport from '@/components/util/SwpppReport';
+import CameraButton from '@/components/ui/Button/CameraButton';
 
 interface TemplateParams {
   [key: string]: any;
@@ -8,9 +9,8 @@ interface TemplateParams {
 type AnyType = string | null | any;
 
 interface CallbackProps {
-  weatherData: any; // Define the type of weatherData as per your data structure
-  // ... other props
-  updateFormData: (newWeatherData: any) => void; // Callback function to update formData
+  weatherData: any;
+  updateFormData: (newWeatherData: any) => void;
 }
 
 const EmailForm = (props: any & CallbackProps) => {
@@ -19,43 +19,80 @@ const EmailForm = (props: any & CallbackProps) => {
     precipitation: '',
     description: '',
     emailTo: '',
-    emailFrom:'',
+    emailFrom: '',
     weatherNotes: '',
     fieldConditionsNotes: '',
+    capturedPhotos: [] as string[],
   });
   const [submitted, setSubmitted] = useState<AnyType>(false);
+  const [allowFormSubmission, setAllowFormSubmission] = useState<AnyType>(true);
+
+
+  const capturePhoto = async (onCapture: (photoDataUrl: string) => void) => {
+    try {
+      const file = await selectImageFile();
+      const photoDataUrl = await convertImageToDataURL(file);
+      onCapture(photoDataUrl);
+      
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const selectImageFile = (): Promise<File> => {
+    return new Promise((resolve, reject) => {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'image/*';
+      input.onchange = (event) => {
+        const file = (event.target as HTMLInputElement).files?.[0];
+        if (file) {
+          resolve(file);
+        } else {
+          reject(new Error('No file selected.'));
+        }
+      };
+      input.click();
+    });
+  };
+
+  const convertImageToDataURL = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+  
+      reader.onload = (event) => {
+        if (event.target) {
+          const dataURL = event.target.result as string;
+          resolve(dataURL);
+        } else {
+          reject(new Error('Failed to read the file.'));
+        }
+      };
+  
+      reader.onerror = () => {
+        reject(new Error('Error reading the file.'));
+      };
+  
+      reader.readAsDataURL(file);
+    });
+  };
 
   useEffect(() => {
-    // When props.weatherData changes, update the formData state
     setFormData((prevFormData) => ({
       ...prevFormData,
       date: props.weatherData?.date || '',
       precipitation: JSON.stringify(props.weatherData?.precipitation) || '',
-      weatherNotes: JSON.stringify(props.weatherData) || "",
-      emailTo: props.emailTo || "",
-      emailFrom: props.emailFrom || "",
-      description: props.projectDescription || "",
-      // Update other formData fields as needed
+      weatherNotes: JSON.stringify(props.weatherData) || '',
+      emailTo: props.emailTo || '',
+      emailFrom: props.emailFrom || '',
+      description: props.projectDescription || '',
+      capturedPhotos: prevFormData.capturedPhotos || [],
     }));
   }, [props.weatherData]);
 
-  const EMAILJS_SERVICE_ID: any = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
-  const EMAILJS_TEMPLATE_ID: any = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
-  const EMAILJS_PUBLIC_KEY: any =process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
-
-  // Assume you have useEffect data for the following fields
-  //const projectName = 'Project Name Data';
-  //const projectAddress = 'Project Address Data';
-  //const lattitude = 'Latitude Data';
-  //const longitude = 'Longitude Data';
-  //const projectDescription = 'Project Description Data';
-  //const projectNumber = 'Project Number Data';
-  //const agency = 'Agency Data';
-  //const responsibleParty = 'Responsible Party Data';
-
-  useEffect(() => {
-    // You can fetch and set the data here if needed
-  }, []);
+  const EMAILJS_SERVICE_ID: any = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+  const EMAILJS_TEMPLATE_ID: any = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+  const EMAILJS_PUBLIC_KEY: any = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
   const resetSubmitted = () => {
     setSubmitted(false);
@@ -69,30 +106,29 @@ const EmailForm = (props: any & CallbackProps) => {
       ...formData,
       [name]: value,
     });
-    console.log(formData);
+  };
+
+  
+  const handlePhotoCapture = (photoDataUrl: string) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      capturedPhotos: [...prevFormData.capturedPhotos, photoDataUrl],
+    }));
   };
 
   const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
-    setSubmitted(true);
-    /*
-    const templateParams: TemplateParams = {
-      date: '10-10-2023',
-      project_name: 'Beards Hill',
-      email_from: 'ira@amiconstruction.com',
-      email_to:"iraf333@gmail.com"
-    };
-    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY)
-      .then((result) => {
-          console.log(result.text);
-      }, (error) => {
-          console.log(error.text);
-      });*/
+      event.preventDefault();
+      setSubmitted(true);
   };
+
+  
 
   return (
     <div className="bg-gradient-to-b from-white to-gray-200 p-6 rounded-lg text-black">
-      <h1 className="text-center text-2xl font-bold mb-4">Report Generator: Send SWPPP Report Via Email Now</h1>
+      <h1 className="text-center text-2xl font-bold mb-4">
+        Report Generator: Send SWPPP Report Via Email Now
+      </h1>
+
       <div className="mb-4">
         <label className="font-bold">Project Name:</label>
         <span className="ml-2">{props.projectName}</span>
@@ -136,6 +172,7 @@ const EmailForm = (props: any & CallbackProps) => {
         <label className="font-bold">Emailing From:</label>
         <span className="ml-2">{props.emailFrom}</span>
       </div>
+
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div className="flex flex-col">
           <label className="font-bold">Date:</label>
@@ -188,10 +225,10 @@ const EmailForm = (props: any & CallbackProps) => {
           <label className="font-bold">Email From:</label>
           <input
             type="text"
-            name="emailTo"
+            name="emailFrom"
             defaultValue={props.emailFrom}
             placeholder={props.emailFrom}
-            value={formData.emailTo}
+            value={formData.emailFrom}
             onChange={handleChange}
             className="px-4 py-2 border border-gray-300 rounded-lg"
           />
@@ -216,21 +253,39 @@ const EmailForm = (props: any & CallbackProps) => {
             className="px-4 py-2 border border-gray-300 rounded-lg"
           />
         </div>
+
+        <div className="flex flex-col">
+          <label className="font-bold">Captured Photos:</label>
+          <div className="flex flex-wrap gap-2">
+            {formData.capturedPhotos.map((photoUrl, index) => (
+              <img
+                key={index}
+                src={photoUrl}
+                alt={`Captured Photo ${index + 1}`}
+                className="w-12 h-12 rounded-lg"
+              />
+            ))}
+          </div>
+          <CameraButton onClick={() => capturePhoto(handlePhotoCapture)} />
+        </div>
+
         <button
           type="submit"
           className="bg-black text-white py-2 px-4 rounded-lg cursor-pointer"
         >
           Send Email and PDF Report
         </button>
-        <SWPPPReport projectName={props.projectName}
-          projectLocation ={props.projectAddress}
+        </form>
+        <SWPPPReport
+          projectName={props.projectName}
+          projectLocation={props.projectAddress}
           town={props.town}
           lat={props.lattitude}
           long={props.longitude}
           agency={props.agency}
           responsibleParty={props.responsibleParty}
           state={props.state}
-          projectDate ={formData.date}
+          projectDate={formData.date}
           precipitation={formData.precipitation}
           description={formData.description}
           weatherNotes={formData.weatherNotes}
@@ -238,8 +293,9 @@ const EmailForm = (props: any & CallbackProps) => {
           userEmail={formData.emailTo}
           emailFrom={formData.emailFrom}
           submitted={submitted}
-          resetSubmitted={resetSubmitted}/>
-      </form>
+          resetSubmitted={resetSubmitted}
+          capturedPhotos={formData.capturedPhotos}
+        />
     </div>
   );
 };
