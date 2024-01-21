@@ -25,7 +25,7 @@ import {
 interface Props {
   session: Session | null;
   user: User | null | undefined;
-  projectNumber: number;
+  projectNumber: number | undefined;
 }
 
 type ErrorType = string | null;
