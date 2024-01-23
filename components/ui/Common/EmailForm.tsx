@@ -286,7 +286,7 @@ const EmailForm = (props: any & CallbackProps) => {
         </div>
 
         <div className="flex flex-col">
-          <label className="font-bold">Captured Photos:</label>
+          <label className="font-bold">Site Photos:</label>
           <div className="flex flex-wrap gap-2">
           {formData.capturedPhotos.map((photoUrl, index) => (
           <Thumbnail
