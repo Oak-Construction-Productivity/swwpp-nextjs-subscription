@@ -25,7 +25,7 @@ const EmailForm = (props: any & CallbackProps) => {
     capturedPhotos: [] as string[],
   });
   const [submitted, setSubmitted] = useState<AnyType>(false);
-  const [allowFormSubmission, setAllowFormSubmission] = useState<AnyType>(true);
+  const [allowFormSubmission, setAllowFormSubmission] = useState<AnyType>(false);
 
 
   const capturePhoto = async (onCapture: (photoDataUrl: string) => void) => {
@@ -117,10 +117,17 @@ const EmailForm = (props: any & CallbackProps) => {
   };
 
   const handleSubmit = (event: FormEvent) => {
-      event.preventDefault();
+    event.preventDefault();
+    if (allowFormSubmission) {
       setSubmitted(true);
+      setAllowFormSubmission(false);
+      // Additional form submission logic if needed
+    }
   };
 
+  const handleFormSubmit = () => {
+    setAllowFormSubmission(true);
+  };
   
 
   return (
@@ -270,7 +277,7 @@ const EmailForm = (props: any & CallbackProps) => {
         </div>
 
         <button
-          type="submit"
+          onClick={handleFormSubmit}
           className="bg-black text-white py-2 px-4 rounded-lg cursor-pointer"
         >
           Send Email and PDF Report
