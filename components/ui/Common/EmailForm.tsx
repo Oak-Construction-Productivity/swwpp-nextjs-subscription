@@ -13,6 +13,30 @@ interface CallbackProps {
   updateFormData: (newWeatherData: any) => void;
 }
 
+interface ThumbnailProps {
+  photoUrl: string;
+  onRemove: () => void;
+}
+
+const Thumbnail: React.FC<ThumbnailProps> = ({ photoUrl, onRemove }) => {
+  return (
+    <div className="relative">
+      {/* Added 'cursor-pointer' class to make it clear that it's clickable */}
+      <div
+        onClick={onRemove}
+        className="absolute top-0 right-0 p-1 bg-red-500 text-white rounded-full cursor-pointer"
+      >
+        X
+      </div>
+      <img
+        src={photoUrl}
+        alt="Captured Photo"
+        className="w-24 h-24 rounded-lg" // Set the size to twice the original
+      />
+    </div>
+  );
+};
+
 const EmailForm = (props: any & CallbackProps) => {
   const [formData, setFormData] = useState({
     date: '',
@@ -264,13 +288,19 @@ const EmailForm = (props: any & CallbackProps) => {
         <div className="flex flex-col">
           <label className="font-bold">Captured Photos:</label>
           <div className="flex flex-wrap gap-2">
-            {formData.capturedPhotos.map((photoUrl, index) => (
-              <img
-                key={index}
-                src={photoUrl}
-                alt={`Captured Photo ${index + 1}`}
-                className="w-12 h-12 rounded-lg"
-              />
+          {formData.capturedPhotos.map((photoUrl, index) => (
+          <Thumbnail
+            key={index}
+            photoUrl={photoUrl}
+            onRemove={() =>
+              setFormData((prevFormData) => ({
+                ...prevFormData,
+                capturedPhotos: prevFormData.capturedPhotos.filter(
+                  (_, i) => i !== index
+                ),
+              }))
+            }
+          />
             ))}
           </div>
           <CameraButton onClick={() => capturePhoto(handlePhotoCapture)} />
