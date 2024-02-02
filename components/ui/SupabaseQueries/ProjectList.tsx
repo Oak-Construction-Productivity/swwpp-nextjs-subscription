@@ -31,7 +31,7 @@ interface Props {
 type ErrorType = string | null;
 type ProjectType = any;
 
-export default function ProjectList({ session, user, projectNumber }: Props) {
+export default function ProjectList({ session, user, projectNumber = 0 }: Props) {
   const supabaseUrl = 'https://eggvjyydqfibdrgfyyny.supabase.co';
   const supabaseKey: string | undefined =
     process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY;
