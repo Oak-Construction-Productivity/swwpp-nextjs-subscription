@@ -13,6 +13,15 @@
 - https://swppp-automation.vercel.app/
 
   ## Video Demo 
+  
+  - Displays multiple projects for swppp automation
+  - Click a project, weather data by day is on the left the report generator is on the right
+  - Click fill to enter in the weather data by day
+  - Add pictures if needed
+  - Add project condition notes if needed
+  - Click send for the swppp report to be generated as a pdf and emailed to the relevant party
+  - Manage several swppp projects in seconds instead of hours pulling data and writing reports 
+
 
 - https://www.loom.com/share/e317bdc6bf7c460c8be36dbba18fe852?sid=2bc6fa8e-8faa-4f47-814f-9a4afef7e529
 
