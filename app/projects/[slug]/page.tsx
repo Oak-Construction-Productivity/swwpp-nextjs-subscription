@@ -4,6 +4,8 @@ import { createClient } from '@supabase/supabase-js';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import EmailForm from '@/components/ui/Common/EmailForm';
 import SWPPPReport from '@/components/util/SwpppReport';
+import ProjectButton from '@/components/ui/Common/ProjectButton';
+import { useRouter } from 'next/navigation';
 
 const supabase = createClientComponentClient();
 const supabaseUrl = 'https://eggvjyydqfibdrgfyyny.supabase.co';
@@ -38,6 +40,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [town, setTown] = useState<UserType>(null);
   const [projectDescription, setProjectDescription] = useState<UserType>(null);
   const [projectNumber, setProjectNumber] = useState<UserType>(null);
+  const [projectIdNumber, setProjectIdNumber] = useState<UserType>(null);
   const [emailTo, setEmailTo] = useState<UserType>(null);
   const [emailFrom, setEmailFrom] = useState<UserType>(null);
   const [dateSubmitted, setDateSubmitted] = useState<UserType>(null);
@@ -62,6 +65,8 @@ export default function Page({ params }: { params: { slug: string } }) {
   const threeDaysDate = getPreviousDayDate(3);
   const fourDaysDate = getPreviousDayDate(4);
   const fiveDaysDate = getPreviousDayDate(5);
+
+  const router = useRouter();
 
   const handleFillDay = (dayIndex: number) => {
     setSelectedDay(dayIndex);
@@ -92,6 +97,7 @@ export default function Page({ params }: { params: { slug: string } }) {
               setProjectName(projects?.[0].project_name);
               setProjectDescription(projects?.[0].project_description);
               setProjectNumber(projects?.[0].project_id);
+              setProjectIdNumber(projects?.[0].id);
               setProjectAddress(projects?.[0].project_address);
               setAgency(projects?.[0].agency);
               setResponsibleParty(projects?.[0].responsible_party);
@@ -168,6 +174,10 @@ export default function Page({ params }: { params: { slug: string } }) {
     };
     afunctiontocall();
   }, []);
+
+  const routeToEditPage = () => {
+    router.push(`${'projects/edit/'}${projectIdNumber}`)
+  }
 
   return (
     <>
@@ -312,6 +322,8 @@ export default function Page({ params }: { params: { slug: string } }) {
               console.log("Updated weather data into the form :) :", newWeatherData);
             }}
           />
+              <div><button type="button" id="btn" onClick={routeToEditPage}>Edit Project</button>
+    </div>
         </div>
       </div>
     </>

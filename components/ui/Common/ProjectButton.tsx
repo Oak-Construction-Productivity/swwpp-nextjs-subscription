@@ -8,7 +8,8 @@ interface ProjectButtonProps {
   color?: string;
   size?: string;
   click?: boolean;
-  className?: string; // Add className prop
+  className?: string;
+  buttonDescription: string; // Add className prop
 }
 
 const ProjectButton: FC<ProjectButtonProps> = ({
@@ -16,7 +17,8 @@ const ProjectButton: FC<ProjectButtonProps> = ({
   color,
   size,
   click,
-  className
+  className,
+  buttonDescription
 }) => {
   // Define a default gradient class if color is not provided
   const gradientClass =
@@ -45,7 +47,7 @@ const ProjectButton: FC<ProjectButtonProps> = ({
         } rounded-full flex flex-col justify-center items-center text-white text-center cursor-pointer text-lg font-bold`}
         >
           <div style={{ fontSize: '30px' }}>+</div>
-          <div>Add Project</div>
+          <div>{buttonDescription}</div>
         </div>
       </>}
     </>

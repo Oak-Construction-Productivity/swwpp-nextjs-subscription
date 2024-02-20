@@ -4,6 +4,7 @@ import { createClient } from '@supabase/supabase-js';
 //import HardhatSpinner from '../Common/HardhatSpinner'; // You may need to implement a Spinner component
 import { redirect } from 'next/navigation';
 import { useCallback, useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 const supabaseUrl = 'https://eggvjyydqfibdrgfyyny.supabase.co';
 const supabaseKey: string | undefined =
@@ -51,6 +52,9 @@ const AddSwpppProject = () => {
   };
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState("");
+  const router = useRouter()
+
 
   useEffect(() => {
     const afunctiontocall = async () => {
@@ -84,9 +88,10 @@ const AddSwpppProject = () => {
 
         if (error) {
           console.error('Error inserting data:', error);
+          setIsError(error.message)
         } else {
           console.log('Data inserted successfully:', data);
-          redirect('/success'); // Redirect to the success page
+          router.push('/projects'); // Redirect to the success page
         }
       } catch (error) {
         console.error('API call failed:', error);
@@ -222,7 +227,7 @@ const AddSwpppProject = () => {
             required
           />
         </div>
-        <div>{/* Add other input fields in a similar manner */}</div>
+        <div><label>{isError.length>1 ? isError:null}</label></div>
 
         <button type="submit" disabled={isLoading}>
           {isLoading ? (

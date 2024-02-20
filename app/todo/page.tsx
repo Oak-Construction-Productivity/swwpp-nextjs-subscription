@@ -99,7 +99,7 @@ export default async function Todo() {
           </div>
           <div className="flex items-center mb-2 p-2 border rounded">
             <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
-            <div>Attach Photos to the PDF</div>
+            <div className="line-through">Attach Photos to the PDF</div>
           </div>
           <div className="flex items-center mb-2 p-2 border rounded">
             <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>

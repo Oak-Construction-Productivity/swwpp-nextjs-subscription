@@ -106,6 +106,7 @@ export default function ProjectList({ session, user, projectNumber = 0 }: Props)
           size="150"
           click={projectLimitBoolen}
           className="custom-class"
+          buttonDescription='Add Project +'
         /> 
     </div>
   );

@@ -4,7 +4,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { redirect } from 'next/navigation';
 import { useState } from 'react';
-
+import { useRouter } from 'next/router';
 // Import your Supabase client instance
 
 const supabaseUrl = 'https://eggvjyydqfibdrgfyyny.supabase.co';
@@ -35,6 +35,9 @@ const ProjectAddForm: React.FC = () => {
 
   const [loading, setLoading] = useState(false);
 
+  const router = useRouter()
+
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -48,9 +51,10 @@ const ProjectAddForm: React.FC = () => {
       if (error) {
         throw error;
       }
+      else{
+        router.push('/projects')
+      }
 
-      // Redirect to success page using the redirect function
-      await redirect('/success-page');
     } catch (error) {
       console.error('Error submitting form:', error);
       // Handle error as needed
