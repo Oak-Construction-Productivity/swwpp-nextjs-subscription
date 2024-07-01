@@ -99,3 +99,22 @@ To run the project in live mode and process payments with Stripe, switch Stripe 
 ### Redeploy
 
 Afterward, you will need to rebuild your production deployment for the changes to take effect. Within your project Dashboard, navigate to the "Deployments" tab, select the most recent deployment, click the overflow menu button (next to the "Visit" button) and select "Redeploy" (do NOT enable the "Use existing Build Cache" option).
+
+
+## Todo List
+
+### Front End
+
+- Design Overhall Schema
+-- Form Design
+-- Header
+-- Forms
+-- Button 
+
+### Back End and Features
+
+- submission form - form handeling route upon successful submission - location
+- settings page, add delete project page
+- edit projects page and form to edit projects
+- project page change from for to overview, new page to route to report submission
+- project page - map tile, link to swppp plan builder
