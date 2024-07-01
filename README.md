@@ -88,6 +88,10 @@ Note that webhook forwarding and the development server must be running concurre
 
 Finally, navigate to [http://localhost:3000](http://localhost:3000) in your browser to see the application rendered.
 
+This repository is a clone of the following repo for any troubleshooting:
+
+https://github.com/vercel/nextjs-subscription-payments
+
 ## Going live
 
 ### Archive testing products
