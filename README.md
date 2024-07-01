@@ -5,7 +5,9 @@
 ## Features
 
 - Automate swppp reporting with daily, weekly, and monthly reporting.
-- Aggregate projects, and weather data for easy swppp reporting
+- Aggregate projects, and weather data for easy swppp daily/weekly reporting
+- Swppp project plan builder and document aggregator
+- Swppp learing resources for Swppp managers
 - Compliance and automation tools to make swppp easy
 
 ## Demo
