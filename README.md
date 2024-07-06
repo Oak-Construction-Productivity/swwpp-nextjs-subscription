@@ -41,7 +41,7 @@ Upon clean build commit and open pull requests.
 
 ## Develop locally
 
-If you haven't already done so, clone your Github repository to your local machine.
+If you haven't already done so, clone your Github repository to your local machine. If not adding stripe products or vercel developments skip stripe and vercel CLIs below and start with NPM. You will need the .env.local to get the site running. 
 
 Next, use the [Vercel CLI](https://vercel.com/download) to link your project:
 
