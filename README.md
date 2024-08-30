@@ -124,3 +124,5 @@ Afterward, you will need to rebuild your production deployment for the changes t
 - edit projects page and form to edit projects
 - project page change from for to overview, new page to route to report submission
 - project page - map tile, link to swppp plan builder
+- project - 3 options -> Plan builder, Swppp AI Consultant, Report Automation
+- Paginate weather data
