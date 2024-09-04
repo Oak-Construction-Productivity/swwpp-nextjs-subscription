@@ -111,18 +111,30 @@ Afterward, you will need to rebuild your production deployment for the changes t
 
 ### Front End
 
-- Design Overhall Schema
+- **Design Overhall Schema**
 -- Form Design
 -- Header
 -- Forms
 -- Button 
+-- Front Page
+-- Chat window
+-- Notification popups
+
 
 ### Back End and Features
 
-- submission form - form handeling route upon successful submission - location
-- settings page, add delete project page
-- edit projects page and form to edit projects
-- project page change from for to overview, new page to route to report submission
-- project page - map tile, link to swppp plan builder
-- project - 3 options -> Plan builder, Swppp AI Consultant, Report Automation
-- Paginate weather data
+- **Project Summary Home Page** 
+- Subpages ->
+-- Swpppy Ai Assistant
+-- Reporting - change old slug page to dashboard, delete old slugging first make sure other slugging works
+-- Binder Builder 
+
+- **Other To Do**
+-- submission form - form handeling route upon successful submission - location
+-- settings page, add delete project page
+-- edit projects page and form to edit projects, add delete here with pop up
+-- project page change from for to overview, new page to route to report submission
+-- project page - map tile, link to swppp plan builder
+-- project - 3 options -> Plan builder, Swppp AI Consultant, Report Automation
+-- Paginate weather data
+
