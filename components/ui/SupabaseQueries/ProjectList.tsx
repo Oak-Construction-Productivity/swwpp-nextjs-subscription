@@ -81,7 +81,7 @@ export default function ProjectList({ session, user, projectNumber = 0 }: Props)
   return (
     <div className="flex flex-col h-60vh">
       {projects.slice(0, projectNumber).map((project: any, index: Key | null | undefined) => (
-        <Link key={index} href={`${'projects/'}${project.id}`}>
+        <Link key={index} href={`${'projects/tempdashboard/'}${project.id}`}>
           <div className="flex flex-col p-4 mb-4">
             <div className="border-2 border-gray-700 bg-gradient-to-b from-gray-200 to-gray-100 rounded-lg shadow-md p-4">
               <p className="font-sans text-lg font-semibold text-gray-800">
